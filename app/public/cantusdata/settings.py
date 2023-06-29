@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     "cantus.staging.simssa.ca",
     "localhost",
     "cantus-app-1",
+    "10.121.210.43",
 ]
 
 # Application definition
