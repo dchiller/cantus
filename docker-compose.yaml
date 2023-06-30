@@ -94,3 +94,21 @@ services:
       - RABBIT_PASSWORD=${RABBIT_PASSWORD}
       - RABBIT_VHOST=${RABBIT_VHOST}
     restart: always
+
+  iiif:
+    build: ./iiif_server
+    container_name: cantus-iiif-1
+    ports:
+      - "8182:8182"
+    command:
+      [
+        "java",
+        "-Dcantaloupe.config=cantaloupe.properties",
+        "-Xmx2g",
+        "-jar",
+        "cantaloupe-5.0.5.jar"
+      ]
+    environment:
+      - ENDPOINT_ADMIN_SECRET=${IIIF_ENDPOINT_ADMIN_SECRET}
+      - ENDPOINT_API_SECRET=${IIIF_ENDPOINT_ADMIN_SECRET}
+
