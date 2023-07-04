@@ -22,6 +22,8 @@ from cantusdata.views.manifest_proxy import ManifestProxyView
 from cantusdata.views import staticpages
 from django.contrib.admin.views.decorators import staff_member_required
 
+from cantusdata.views.homepage_redirect_view import redirect_to_salzinnes
+
 urlpatterns = [
     # Admin pages
     # All custom admin pages should be added above the root
@@ -38,7 +40,7 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     # Main pages
-    path("manuscripts/", ManuscriptList.as_view(), name="manuscript-list"),
+    path("", redirect_to_salzinnes, name="salzinnes-redirect"),
     path(
         "manuscript/<int:pk>/",
         ManuscriptDetail.as_view(),
