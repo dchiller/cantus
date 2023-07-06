@@ -21,7 +21,7 @@ git submodule update --init
 ```
 
 ## Launching the website
-We use [Docker Compose](https://docs.docker.com/compose/) to containerize each service and keep all our dependencies in order.
+We use [Docker Compose](https://docs.docker.com/compose/) to containerize each service and keep all our dependencies in order. Cantus Ultimus requires a docker compose version > 2.8.0. It is known to work with Docker Engine > 23.0.0.
 
 ### The `.env` file
 The build process relies on environment variables specified in the `.env` file, which is located at the root of the repository. 
