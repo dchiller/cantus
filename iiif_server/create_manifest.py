@@ -51,13 +51,28 @@ def create_canvas_item(canvas_name):
     }
     return canvas
 
-if __name__ == "__main__":
-    image_names = glob.glob("/Users/dylanhillerbrand/documents/ddmal/salzinnes-images/*.tiff")
+def collect_image_files(path):
+    image_names = glob.glob(path + "/*.tiff")
     image_names = [x.split("/")[-1].split(".")[0] for x in image_names]
+    return image_names
+
+def order_image_files(image_names):
+    sorted_image_names = sorted(image_names, key = lambda x: (len(x.split("-")[1].split('_')[0]), x.split("_")[1],
+                                                              x.split("_")[1], x.split("_")[2] if len(x.split("_")) > 2 else 0))
+    
+    # Adjust order for the fact that the first folio is added after the 7th
+    # (ie. insert after 8 initial images and first 7 folios (2 x 7 = 14 images))
+    sorted_image_names.insert(21, sorted_image_names.pop(8))
+    sorted_image_names.insert(21, sorted_image_names.pop(8))
+    return sorted_image_names
+
+if __name__ == "__main__":
+    image_names = collect_image_files("/Users/dylanhillerbrand/documents/ddmal/salzinnes-images")
+    image_names = order_image_files(image_names)
     canvas_list = []
     for image in image_names:
         canvas = create_canvas_item(image)
         canvas_list.append(canvas)
     manifest_metadata["sequences"][0]["canvases"] = canvas_list
-    with open("salzinnes_minisite_manifest.json", "w") as f:
+    with open("salzinnes_minisite_manifest.json", "w", encoding = 'utf-8') as f:
         json.dump(manifest_metadata, f, indent=2)
