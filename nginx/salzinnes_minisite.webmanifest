@@ -1,0 +1,17 @@
+{
+    "name": "Salzinnes Minisite WebApp",
+    "short_name": "Salzinnes",
+    "description": "Web app for use at the Salzinnes exhibition",
+    "icons": [
+      {
+        "src": "/static/img/favicon.ico",
+        "sizes": "30X32",
+        "type": "image/ico"
+      }
+    ],
+    "start_url": "/manuscript/123723",
+    "display": "fullscreen",
+    "theme_color": "#B12A34",
+    "background_color": "#B12A34"
+  }
+  

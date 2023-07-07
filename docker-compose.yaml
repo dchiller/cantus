@@ -41,7 +41,7 @@ services:
     container_name: cantus-nginx-1
     build: ./nginx
     ports:
-      - "${PORT}:80"
+      - "${PORT}:443"
     depends_on:
       - app
 
@@ -98,8 +98,13 @@ services:
   iiif:
     build: ./iiif_server
     container_name: cantus-iiif-1
+<<<<<<< HEAD
     ports:
       - "8182:8182"
+=======
+    volumes:
+      - ../salzinnes-images:/imgs
+>>>>>>> 1f9c1024 (Further modifications for local app: iiif, ssl, pwa)
     command:
       [
         "java",
