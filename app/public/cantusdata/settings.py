@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
     "cantus.staging.simssa.ca",
     "localhost",
     "cantus-app-1",
-    "10.121.210.43",
+    "salzinnes-antiphonal",
 ]
 
 # Application definition
@@ -168,7 +168,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 SESSION_COOKIE_SECURE = is_production
 CSRF_COOKIE_SECURE = is_production
-CSRF_TRUSTED_ORIGINS = ['https://10.121.210.43:8000']
 
 SECURE_HSTS_SECONDS = 86400
 SECURE_HSTS_INCLUDE_SUBDOMAINS = is_production

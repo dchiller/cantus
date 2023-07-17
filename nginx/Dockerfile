@@ -23,3 +23,5 @@ FROM nginx:1.25
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY --from=frontend /code/static /code/static
 COPY --from=django-static /code/cantusdata/static /code/static
+COPY ./salzinnes_minisite_manifest.json /code/static
+COPY ./salzinnes_minisite.webmanifest /code/static

@@ -1,16 +1,17 @@
 import json
 import subprocess
 import glob
+import re
 
 manifest_metadata = {"@context": "http://iiif.io/api/presentation/2/context.json",
-                     "@id": "https://10.121.210.43:8000/iiif/salzinnes-minisite/manifest",
+                     "@id": "http://salzinnes-antiphonal/iiif/salzinnes-minisite/manifest",
                      "@type": "sc:Manifest",
                      "label": "Salzinnes Antiphonal",
                      "viewingDirection": "left-to-right",
                      "viewingHint": "paged",
                      "sequences": [
                          {"@context": "http://iiif.io/api/presentation/2/context.json",
-                          "@id": "https://10.121.210.43:8000/iiif/salzinnes-minisite/sequence/normal",
+                          "@id": "http://salzinnes-antiphonal/iiif/salzinnes-minisite/sequence/normal",
                           "@type": "sc:Sequence",
                           "label": "Hosted Order",
                           "viewingDirection": "left-to-right",
@@ -28,25 +29,25 @@ def create_canvas_item(canvas_name):
     width = int(results[0])
     height = int(results[1])
     canvas = {"@context": "http://iiif.io/api/presentation/2/context.json",
-            "@id": "https://10.121.210.43:8000/iiif/salzinnes-minisite/canvases/" + canvas_name,
+            "@id": "http://salzinnes-antiphonal/iiif/salzinnes-minisite/canvases/" + canvas_name,
               "@type": "sc:Canvas",
               "label": canvas_name,
               "height": height,
               "width": width,
             "images": [
-                {"@id": "https://10.121.210.43:8000/iiif/salzinnes-minisite/annotation/" + canvas_name + "-image",
+                {"@id": "http://salzinnes-antiphonal/iiif/salzinnes-minisite/annotation/" + canvas_name + "-image",
                  "@type": "oa:Annotation",
                  "motivation": "sc:painting",
                  "resource": {
-                     "@id": "https://10.121.210.43:8000/iiif/2/" + canvas_name + ".tiff/full/max/0/default.jpg",
+                     "@id": "http://salzinnes-antiphonal/iiif/2/" + canvas_name + ".tiff/full/max/0/default.jpg",
                         "@type": "dctypes:Image",
                         "format": "image/jpeg",
                         "service": {
                             "@context": "http://iiif.io/api/image/2/context.json",
-                            "@id": "https://10.121.210.43:8000/iiif/2/" + canvas_name + ".tiff",
+                            "@id": "http://salzinnes-antiphonal/iiif/2/" + canvas_name + ".tiff",
                             "profile": "http://iiif.io/api/image/2/context.json"
                  }},
-                 "on": "https://10.121.210.43:8000/iiif/salzinnes-minisite/canvases/" + canvas_name}
+                 "on": "http://salzinnes-antiphonal/iiif/salzinnes-minisite/canvases/" + canvas_name}
                 ]
     }
     return canvas
@@ -57,8 +58,9 @@ def collect_image_files(path):
     return image_names
 
 def order_image_files(image_names):
-    sorted_image_names = sorted(image_names, key = lambda x: (len(x.split("-")[1].split('_')[0]), x.split("_")[1],
-                                                              x.split("_")[1], x.split("_")[2] if len(x.split("_")) > 2 else 0))
+    sorted_image_names = sorted(image_names, key = lambda x: (len(x.split("-")[1].split('_')[0]), re.findall(r"\d+",x.split("_")[1])[0],
+                                                             re.findall("[rvwxyz]", x.split("_")[1])[0] if len(re.findall("[rvwxyz]", x.split("_")[1])) > 0 else "z", 
+                                                             int(x.split("_")[2]) if len(x.split("_")) > 2 else 0))
     
     # Adjust order for the fact that the first folio is added after the 7th
     # (ie. insert after 8 initial images and first 7 folios (2 x 7 = 14 images))
