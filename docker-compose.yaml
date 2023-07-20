@@ -41,7 +41,7 @@ services:
     container_name: cantus-nginx-1
     build: ./nginx
     ports:
-      - "8888:80"
+      - "80:80"
     depends_on:
       - app
 

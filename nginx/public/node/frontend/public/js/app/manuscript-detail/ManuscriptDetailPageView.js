@@ -15,13 +15,12 @@ import DivaView from "./DivaView";
 import ManuscriptInfoView from "./ManuscriptInfoView";
 import NavFolioNumberView from './NavFolioNumberView';
 import DivaFolioAdvancerView from './DivaFolioAdvancerView';
-import SalzinnesNavMenuView from './NavMenuView';
+import {NavItemView, NavItemModel}  from './NavMenuView';
 import ModalView from 'layout/ModalView';
 
 import template from './manuscript.template.html';
 
 var manuscriptStateChannel = Radio.channel('manuscript');
-
 /**
  * This page shows an individual manuscript.  You get a nice diva viewer
  * and you can look through the chant info.
@@ -58,9 +57,6 @@ export default Marionette.LayoutView.extend({
     initialize: function ()
     {
         this._viewportContent = null;
-
-        this.salzinnesNavMenuView = new SalzinnesNavMenuView();
-        this.salzinnesNavMenuModalView = new ModalView({title: "Salzinnes Highlights", view: this.salzinnesNavMenuView, modalId: "salzinnesNavMenuModal"});
     },
 
     startResizing: function (event)
@@ -186,7 +182,14 @@ export default Marionette.LayoutView.extend({
         this.searchViewRegion.show(searchView);
         this.navFolioRegion.show(new NavFolioNumberView());
         this.folioAdvancerRegion.show(new DivaFolioAdvancerView());
-        this.salzinnesNavMenuRegion.show(this.salzinnesNavMenuModalView);
+
+        // this.salzinnesNavMenuView = new NavMenuView({model: this.model});
+        // this.salzinnesNavMenuModalView = new ModalView({title: "Salzinnes Highlights", view: this.salzinnesNavMenuView, modalId: "salzinnesNavMenuModal"});
+        this.navItemModel = new NavItemModel()
+        this.navItemModel.set({navTitle:"Folio 2r", 
+        imageLink:"http://salzinnes-antiphonal/iiif/2/Salzinnes-I_002r.tiff/full/150,/0/default.jpg", 
+        navDescription: "The Annunciation"})
+        this.salzinnesNavMenuRegion.show(new NavItemView({model : this.navItemModel}));
 
         // Attach the info sidenav
         this._infoSidenavParent = $('<div class="manuscript-info-sidenav-container"></div>');
