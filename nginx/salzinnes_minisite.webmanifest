@@ -4,9 +4,9 @@
     "description": "Web app for use at the Salzinnes exhibition",
     "icons": [
       {
-        "src": "/static/img/favicon.ico",
+        "src": "/static/img/miniapp-img.png",
         "sizes": "30X32",
-        "type": "image/ico"
+        "type": "image/png"
       }
     ],
     "start_url": "/manuscript/123723",
