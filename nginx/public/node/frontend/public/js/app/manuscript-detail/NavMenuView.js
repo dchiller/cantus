@@ -2,7 +2,6 @@ import Marionette from "marionette";
 import Backbone from "backbone";
 
 import navitemtemplate from "./nav-item.template.html";
-import navmenutemplate from "./nav-menu.template.html";
 
 var NavItemModel = Backbone.Model.extend({});
 
