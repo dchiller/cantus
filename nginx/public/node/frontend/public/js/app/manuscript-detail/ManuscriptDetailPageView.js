@@ -15,7 +15,7 @@ import DivaView from "./DivaView";
 import ManuscriptInfoView from "./ManuscriptInfoView";
 import NavFolioNumberView from './NavFolioNumberView';
 import DivaFolioAdvancerView from './DivaFolioAdvancerView';
-import {NavItemView, NavItemModel}  from './NavMenuView';
+import {NavMenuView, testNavMenuCollection}  from './NavMenuView';
 import ModalView from 'layout/ModalView';
 
 import template from './manuscript.template.html';
@@ -183,13 +183,12 @@ export default Marionette.LayoutView.extend({
         this.navFolioRegion.show(new NavFolioNumberView());
         this.folioAdvancerRegion.show(new DivaFolioAdvancerView());
 
-        // this.salzinnesNavMenuView = new NavMenuView({model: this.model});
-        // this.salzinnesNavMenuModalView = new ModalView({title: "Salzinnes Highlights", view: this.salzinnesNavMenuView, modalId: "salzinnesNavMenuModal"});
-        this.navItemModel = new NavItemModel()
-        this.navItemModel.set({navTitle:"Folio 2r", 
-        imageLink:"http://salzinnes-antiphonal/iiif/2/Salzinnes-I_002r.tiff/full/150,/0/default.jpg", 
-        navDescription: "The Annunciation"})
-        this.salzinnesNavMenuRegion.show(new NavItemView({model : this.navItemModel}));
+        this.navCollection = testNavMenuCollection;
+        this.salzinnesNavMenuView = new NavMenuView({collection: this.navCollection});
+        // this.navItemModel = testNavItemModel;
+        // this.salzinnesNavMenuView = new NavItemView({model: this.navItemModel});
+        this.salzinnesNavMenuModalView = new ModalView({title: "Salzinnes Highlights", view: this.salzinnesNavMenuView, modalId: "salzinnesNavMenuModal"});
+        this.salzinnesNavMenuRegion.show(this.salzinnesNavMenuModalView);
 
         // Attach the info sidenav
         this._infoSidenavParent = $('<div class="manuscript-info-sidenav-container"></div>');

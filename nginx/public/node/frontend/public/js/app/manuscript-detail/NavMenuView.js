@@ -53,10 +53,13 @@ const NavItemView =  Marionette.ItemView.extend({
 
 const NavMenuView = Marionette.CollectionView.extend({
     childView: NavItemView,
-    tagName: 'div id="salzinnes-highlight-folios" class="highlight-collection',
-    initialize: function() {
-        this.collection = new NavMenuCollection(folioNavOptions);
-    }
+    tagName: 'div',
+    className: 'highlight-collection',
+    id: 'salzinnes-highlight-folios'
 });
 
-export {NavItemView, NavItemModel}
+const testNavMenuCollection = new NavMenuCollection();
+testNavMenuCollection.set(folioNavOptions);
+
+
+export {NavMenuView, testNavMenuCollection}
