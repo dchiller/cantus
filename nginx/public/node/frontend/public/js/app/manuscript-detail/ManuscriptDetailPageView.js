@@ -165,7 +165,7 @@ export default Marionette.LayoutView.extend({
         var searchTerm = manuscriptStateChannel.request('search');
         var searchView = new SearchView({
             searchTerm: searchTerm,
-            providers: [chantSearchProvider, notationSearchProvider]
+            providers: [chantSearchProvider]
         });
 
         // Set the global search state when the search term changes
