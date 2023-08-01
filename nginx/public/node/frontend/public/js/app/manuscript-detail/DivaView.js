@@ -85,6 +85,9 @@ export default Marionette.ItemView.extend({
 
             enableHighlight: true,
             enableDownload: true,
+            enableFullscreen: false,
+            enableGridIcon: false,
+            enableLinkIcon: false,
 
             fixedHeightGrid: true,
 
@@ -93,8 +96,7 @@ export default Marionette.ItemView.extend({
             enableCanvas: true,
 
             objectData: '/manifest-proxy/' + manifestUrl,
-
-            blockMobileMove: false
+            blockMobileMove: false,
         };
 
         // Destroy the diva div just in case
@@ -337,6 +339,8 @@ export default Marionette.ItemView.extend({
 
         // Add a closing parenthesis (the opening is within the page alias)
         pageLabel.appendChild(document.createTextNode(')'));
+
+        $("#diva-1-view-menu").hide();
     },
 
     /**
