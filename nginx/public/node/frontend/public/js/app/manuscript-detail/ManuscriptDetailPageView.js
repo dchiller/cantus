@@ -47,11 +47,13 @@ export default Marionette.LayoutView.extend({
         toolbarRow: '#toolbar-row',
         resizer: '#manuscript-data-container .resizer',
         divaColumn: "#diva-column",
-        manuscriptDataColumn: '#manuscript-data-column'
+        manuscriptDataColumn: '#manuscript-data-column',
+        manuscriptFolioPane: '#manuscript-folio-pane',
     },
 
     events: {
-        'mousedown @ui.resizer': 'startResizing'
+        'mousedown @ui.resizer': 'startResizing',
+        'shown.bs.tab #manuscript-nav-folio-number': '_onTabShown',
     },
 
     initialize: function ()
@@ -287,6 +289,15 @@ export default Marionette.LayoutView.extend({
     onWindowResized: function ()
     {
         this._updateViewport();
-    }
+    },
+
+    _onTabShown: function (event){
+        this.searchViewRegion.currentView.activeField = {type : "all", name:"All Text Fields"};
+        this.searchViewRegion.currentView.query = "";
+        this.searchViewRegion.currentView.providers[0].collection.reset();
+        this.searchViewRegion.currentView.cachedQueries = {};
+        this.searchViewRegion.currentView._setInitialSearchTerm();
+        this.searchViewRegion.currentView.render();
+    },
 });
 
