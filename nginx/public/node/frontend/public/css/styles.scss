@@ -321,8 +321,12 @@ body.propagate-height {
 
     // Distribute width to the columns equally by default,
     // allocating more for the Diva column on large screens
-    > * {
-        width: 50%;
+    > :first-child {
+        width: 65%;
+    }
+
+    > :last-child {
+        width: 35%;
     }
 
     @media (min-width: $screen-lg-min) {
