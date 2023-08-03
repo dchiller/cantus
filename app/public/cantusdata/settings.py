@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "cantus-app-1",
     "salzinnes-antiphonal",
+    "169.254.175.5",
 ]
 
 # Application definition
