@@ -24,7 +24,7 @@ var KNOWN_FIELDS = [
     {type: "office", "name": "Office"}
 ];
 
-var INITIAL_LOAD_CUTOFF = 10;
+var INITIAL_LOAD_CUTOFF = 20;
 var CLIENT_SIDE_SORT_LIMIT = 500;
 
 /**
@@ -148,7 +148,7 @@ export default Marionette.Object.extend({
             return;
         }
 
-        if (field !== 'all')
+        if (field === 'mode')
         {
             // FIXME(wabain): I don't think this is ever actually triggered
             // If the field is a mode then the value is already an array

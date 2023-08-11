@@ -166,7 +166,7 @@ export default Marionette.LayoutView.extend({
             this.activeField = field;
             this.ui.fieldSelectorLabel.text(this.activeField.name);
 
-            this.query = this.cachedQueries[field.type] || '';
+            this.query = '';
 
             this.renderActiveField();
         }

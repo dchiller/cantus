@@ -66,6 +66,11 @@ export default Marionette.ItemView.extend({
             // escaped hyphens in the query string.
             searchInput = searchInput.replaceAll("-","\\-");
         }
+        if (searchField !== 'mode'){
+            if (searchInput.startsWith('"') && !searchInput.endsWith('"')){
+                searchInput = searchInput + '"';
+            }
+        }
         // FIXME(wabain): While this class needs to take a SearchInput model so it can initially
         // be rendered, we're not actually updating that model here - we're just triggering
         // an event which will cause the appropriate changes to propagate. That's kind of
@@ -89,8 +94,12 @@ export default Marionette.ItemView.extend({
         }
 
         // Send the keycode to the SuggestionCollectionView
-        if (e)
+        if (e){
             this.trigger('keydown:input', e.keyCode);
+            if (e.keyCode === 13){
+                this.ui.searchInput.blur();
+            }
+        }
     },
 
     onRender: function ()

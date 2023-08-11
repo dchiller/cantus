@@ -48,7 +48,14 @@ export default Marionette.CompositeView.extend({
         // Get the active suggestion
         var el = this.$('.active');
         // Add boolean operator 'AND' between all words, in order to match exactly the suggestion
-        var text = `"${el.text()}"`
+        var text = el.text()
+        if (text.startsWith('"')){
+            text = text.slice(1,0);
+        }
+        if (text.endsWith('"')){
+            text = text.slice(0,-1);
+        }
+        text = `"${text}"`
         this.trigger('click:suggestion', null, text);
         this.hide();
     },
@@ -72,6 +79,16 @@ export default Marionette.CompositeView.extend({
         {
             // Enter key
             case 13:
+                if (!this.$('.active').length){
+                    // If there is no active suggestion, search for
+                    // first suggestion.
+                    el = this.$('a.list-group-item:first');
+                    if (el.length)
+                        this._setActive(el);
+                    else {
+                        break;
+                    }
+                }
                 this._searchActiveSuggestion();
                 break;
 
