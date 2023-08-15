@@ -70,6 +70,9 @@ export default Marionette.ItemView.extend({
             if (searchInput.startsWith('"') && !searchInput.endsWith('"')){
                 searchInput = searchInput + '"';
             }
+            if (searchInput === '"'){
+                searchInput = '';
+            }
         }
         // FIXME(wabain): While this class needs to take a SearchInput model so it can initially
         // be rendered, we're not actually updating that model here - we're just triggering

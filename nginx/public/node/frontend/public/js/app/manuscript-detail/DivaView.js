@@ -341,6 +341,9 @@ export default Marionette.ItemView.extend({
         pageLabel.appendChild(document.createTextNode(')'));
 
         $("#diva-1-view-menu").hide();
+        $("#diva-1-zoom-label").hide();
+        $("#diva-1-zoom-in-button").removeClass("diva-zoom-in-button").append('<span class="glyphicon glyphicon-zoom-in"></span>');
+        $("#diva-1-zoom-out-button").removeClass("diva-zoom-out-button").append('<span class="glyphicon glyphicon-zoom-out"></span>');
     },
 
     /**

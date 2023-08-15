@@ -174,6 +174,7 @@ var SolrQuery = Marionette.Object.extend({
             var term = self.fields[field + '_t_hidden'];
             if (term)
             {
+                if (term.startsWith('"')){term = term.slice(1, -1)}
                 var manuscript_id = self.fields.manuscript_id || '*';
                 suggestString = `q=${self.getSolrTerm(term, false)}&field=${field}&manuscript_id=${manuscript_id}`;
             }
