@@ -59,10 +59,10 @@ export default Marionette.LayoutView.extend({
     initialize: function ()
     {
         this._viewportContent = null;
-        var timeoutReset = window.setTimeout(function(){location.reload()}, 30000);
+        var timeoutReset = window.setTimeout(function(){location.reload(true)}, 1200000);
         document.body.addEventListener('click', function () {
             window.clearTimeout(timeoutReset);
-            timeoutReset = window.setTimeout(function(){location.reload()}, 30000);
+            timeoutReset = window.setTimeout(function(){location.reload(true)}, 1200000);
     });
     },
 
