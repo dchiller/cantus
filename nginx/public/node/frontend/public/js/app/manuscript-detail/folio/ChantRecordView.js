@@ -253,6 +253,9 @@ export default Marionette.ItemView.extend({
 		"click .btnStop": "stop"
 	},
 	submit: function mainPlay() {
+		if (MIDI.getContext().state === "running") {
+			audioStopReset(MIDI);
+		}
 		var volArr = parse_volpiano(this.ui.volpianoSyllables);
 		this.ui.btnPlay.html("Playing...");
 		this.ui.btnPlay.attr("disabled", true);
