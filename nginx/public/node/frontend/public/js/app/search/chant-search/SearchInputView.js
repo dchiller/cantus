@@ -21,7 +21,8 @@ export default Marionette.ItemView.extend({
     },
 
     ui: {
-        searchInput: '.search-input'
+        searchInput: '.search-input',
+        invalidVolpianoMessage: '#invalid-volpiano-message'
     },
 
     initialize: function ()
@@ -57,8 +58,13 @@ export default Marionette.ItemView.extend({
                 this.ui.searchInput.val("1-");
                 searchInput = "1-";
             }
-            searchInput = searchInput.replaceAll(this.invalidVolpianoRegex, "")
-            this.ui.searchInput.val(searchInput)
+            if (searchInput.match(this.invalidVolpianoRegex)){
+                searchInput = searchInput.replaceAll(this.invalidVolpianoRegex, "")
+                this.ui.searchInput.val(searchInput)
+                this.ui.invalidVolpianoMessage.show()
+            } else {
+                this.ui.invalidVolpianoMessage.hide()
+            }
             // Remove the treble clef before the string is sent to solr. Volpiano
             // searches assume treble clef.
             searchInput = searchInput.replaceAll("1-","");
@@ -67,7 +73,7 @@ export default Marionette.ItemView.extend({
             searchInput = searchInput.replaceAll("-","\\-");
         }
         if (searchField !== 'mode'){
-            if (searchInput.startsWith('"') && !searchInput.endsWith('"')){
+            if ((searchInput.split('"').length -1) % 2 === 1){
                 searchInput = searchInput + '"';
             }
             if (searchInput === '"'){

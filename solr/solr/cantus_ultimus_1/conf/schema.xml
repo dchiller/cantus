@@ -112,7 +112,6 @@
     <copyField source="marginalia" dest="text" />
     <copyField source="incipit" dest="text" />
     <copyField source="full_text" dest="text" />
-    <copyField source="folio" dest="text" />
     <copyField source="genre" dest="text" />
 
     <!-- Copy string fields we want to search by into dynamic text fields -->
