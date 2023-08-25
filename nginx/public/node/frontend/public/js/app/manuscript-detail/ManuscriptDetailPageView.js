@@ -64,6 +64,8 @@ export default Marionette.LayoutView.extend({
             window.clearTimeout(timeoutReset);
             timeoutReset = window.setTimeout(function(){location.reload(true)}, 120000);
     });
+        var metaViewport = document.querySelector('meta[name=viewport]');
+        metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
     },
 
     startResizing: function (event)
