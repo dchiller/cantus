@@ -156,7 +156,7 @@ export default Marionette.CompositeView.extend({
         if (this.collection.length === 0)
         {
             // No chants
-            this.ui.errorMessages.html("No chant records begin in this image.");
+            this.ui.errorMessages.html("No chant records begin on this page.");
         }
         else
         {
