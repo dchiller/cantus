@@ -9,6 +9,7 @@ RUN chmod u+x /code/install-packages.sh && \
 FROM python:3.8.17
 COPY app/django-config.sh /code/
 COPY app/cantus-staticpages/ /code/cantus-staticpages/
+COPY app/production-mei-files/ /code/production-mei-files/
 EXPOSE 8001
 
 RUN chmod u+x /code/django-config.sh
