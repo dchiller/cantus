@@ -15,7 +15,7 @@ TEST_MEI_FILE = path.join(
     "mei_processing",
     "test_mei_files",
     "123723",
-    "cdn-hsmu-m2149l4_001r.mei",
+    "CDN-Hsmu_M2149.L4_001r.mei",
 )
 
 
@@ -125,28 +125,30 @@ class MEITokenizerTestCase(TestCase):
         #     <nc xml:id="m-d6735a59-f657-4197-a004-c949253f9268" facs="#m-0306c35f-6624-477a-8f15-f2995401695a" oct="3" pname="f"/>
         # </neume>
         # Relevant zones for first three neumes:
-        # <zone xml:id="zone-0000001993884372" ulx="2608" uly="2399" lrx="2678" lry="2448"/>
-        # <zone xml:id="zone-0000001466045923" ulx="2725" uly="2396" lrx="2795" lry="2445"/>
-        # <zone xml:id="zone-0000000528011450" ulx="2795" uly="2444" lrx="2865" lry="2493"/>
-        # <zone xml:id="m-0306c35f-6624-477a-8f15-f2995401695a" ulx="3015" uly="2292" lrx="3085" lry="2341"/>
-        # Last two neumes in test file:
+        # <zone xml:id="zone-0000001993884372" ulx="2608" uly="2391" lrx="2678" lry="2440"/>
+        # <zone xml:id="zone-0000001466045923" ulx="2725" uly="2391" lrx="2795" lry="2440"/>
+        # <zone xml:id="zone-0000000528011450" ulx="2795" uly="2440" lrx="2865" lry="2489"/>
+        # <zone xml:id="m-0306c35f-6624-477a-8f15-f2995401695a" ulx="3015" uly="2293" lrx="3085" lry="2342"/>
+        # Last three neumes in test file:
         # <neume xml:id="m-fb4e81e1-f606-4888-aaa0-4170bd5bbf0e">
         #     <nc xml:id="m-62905ec7-7482-46fc-b018-da5787b8dc91" facs="#m-cedf6e10-16c6-4857-ac25-ff4799e73af2" oct="2" pname="d"/>
         #     <nc xml:id="m-ea486c9c-3aa8-4762-8225-22d0ad0af6e0" facs="#m-919045a2-520e-4d7b-aa2f-f82ccbc14cc5" oct="2" pname="c"/>
         # </neume>
-        # <neume xml:id="neume-0000001160139058">
-        #     <nc xml:id="nc-0000000858715089" facs="#zone-0000001183492561" oct="2" pname="e"/>
-        #     <nc xml:id="nc-0000001382334633" facs="#zone-0000002089367816" oct="2" pname="d" tilt="n"/>
+        # <neume xml:id="neume-0000000529809002">
+        #     <nc xml:id="nc-0000002078669346" facs="#zone-0000001705972533" oct="2" pname="e"/>
         # </neume>
-        # Relevant zones for the last two neumes:
-        # <zone xml:id="m-cedf6e10-16c6-4857-ac25-ff4799e73af2" ulx="4750" uly="7774" lrx="4821" lry="7824"/>
-        # <zone xml:id="m-919045a2-520e-4d7b-aa2f-f82ccbc14cc5" ulx="4811" uly="7824" lrx="4882" lry="7874"/>
-        # <zone xml:id="zone-0000001183492561" ulx="5037" uly="7724" lrx="5108" lry="7774"/>
-        # <zone xml:id="zone-0000002089367816" ulx="5104" uly="7774" lrx="5175" lry="7824"/>
+        # <neume xml:id="neume-0000000342143339">
+        #     <nc xml:id="nc-0000001398460892" facs="#zone-0000000187867615" oct="2" pname="d"/>
+        # </neume>
+        # Relevant zones for the last three neumes:
+        # <zone xml:id="m-cedf6e10-16c6-4857-ac25-ff4799e73af2" ulx="4750" uly="7782" lrx="4822" lry="7833"/>
+        # <zone xml:id="m-919045a2-520e-4d7b-aa2f-f82ccbc14cc5" ulx="4811" uly="7833" lrx="4883" lry="7884"/>
+        # <zone xml:id="zone-0000001705972533" ulx="5033" uly="7731" lrx="5105" lry="7782"/>
+        # <zone xml:id="zone-0000000187867615" ulx="5097" uly="7782" lrx="5169" lry="7833"/>
         with self.subTest("First 1-gram"):
             expected_1gram: NgramDocument = {
-                "location": json.dumps(
-                    [{"ulx": 2608, "uly": 2399, "width": 70, "height": 49}]
+                "location_json": json.dumps(
+                    [{"ulx": 2608, "uly": 2391, "width": 70, "height": 49}]
                 ),
                 "pitch_names": "d",
                 "contour": "",
@@ -156,8 +158,8 @@ class MEITokenizerTestCase(TestCase):
             self.assertEqual(expected_1gram, ngram_docs_1_2[0])
         with self.subTest("Ngram of first 3 neumes"):
             expected_3gram: NgramDocument = {
-                "location": json.dumps(
-                    [{"ulx": 2608, "uly": 2292, "width": 477, "height": 201}]
+                "location_json": json.dumps(
+                    [{"ulx": 2608, "uly": 2293, "width": 477, "height": 196}]
                 ),
                 "neume_names": "punctum_clivis_punctum",
                 "pitch_names": "d_d_c_f",
@@ -170,8 +172,8 @@ class MEITokenizerTestCase(TestCase):
             # This 3-gram is constructed from the second three
             # pitches of the sample above.
             pitch_3gram: NgramDocument = {
-                "location": json.dumps(
-                    [{"ulx": 2725, "uly": 2292, "width": 360, "height": 201}]
+                "location_json": json.dumps(
+                    [{"ulx": 2725, "uly": 2293, "width": 360, "height": 196}]
                 ),
                 "pitch_names": "d_c_f",
                 "semitone_intervals": "-2_5",
@@ -190,8 +192,8 @@ class MEITokenizerTestCase(TestCase):
             # This 4-gram is constructed from the last three
             # pitches of the test document.
             pitch_3gram_1: NgramDocument = {
-                "location": json.dumps(
-                    [{"ulx": 4811, "uly": 7724, "width": 364, "height": 150}]
+                "location_json": json.dumps(
+                    [{"ulx": 4811, "uly": 7731, "width": 358, "height": 153}]
                 ),
                 "pitch_names": "c_e_d",
                 "semitone_intervals": "4_-2",
@@ -209,13 +211,13 @@ class MEITokenizerTestCase(TestCase):
             # This 4-gram is constructed from the last four
             # pitches of the test document.
             pitch_4gram: NgramDocument = {
-                "location": json.dumps(
-                    [{"ulx": 4750, "uly": 7724, "width": 425, "height": 150}]
+                "location_json": json.dumps(
+                    [{"ulx": 4750, "uly": 7731, "width": 419, "height": 153}]
                 ),
                 "pitch_names": "d_c_e_d",
                 "semitone_intervals": "-2_4_-2",
                 "contour": "d_u_d",
-                "neume_names": "clivis_clivis",
+                "neume_names": "clivis_punctum_punctum",
             }
             self.assertIn(
                 pitch_4gram,

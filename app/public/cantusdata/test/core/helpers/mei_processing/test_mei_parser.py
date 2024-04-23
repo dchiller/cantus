@@ -48,27 +48,27 @@ class MEIParserTestCase(TestCase):
                 "mei_processing",
                 "test_mei_files",
                 "123723",
-                "cdn-hsmu-m2149l4_001r.mei",
+                "CDN-Hsmu_M2149.L4_001r.mei",
             )
         )
         zones = parser.zones
         syllables = parser.syllables
         with self.subTest("Test number of zones"):
-            self.assertEqual(len(zones), 324)
+            self.assertEqual(len(zones), 353)
         with self.subTest("Test number of syllables"):
-            self.assertEqual(len(syllables), 116)
+            self.assertEqual(len(syllables), 115)
         with self.subTest("Test sample zone #1"):
-            zone_key = "#m-bd6dbd3e-46ec-4244-bfb9-b22aae69116d"
+            zone_key = "#m-69ee7af4-e831-41fd-9d22-c2e0433e0847"
             expected_zone = {
-                "coordinates": (1191, 4482, 5276, 4791),
-                "rotate": -0.180727,
+                "coordinates": (2430, 2674, 5315, 3018),
+                "rotate": -0.937391,
             }
             self.assertIn(zone_key, zones)
             self.assertEqual(zones[zone_key], expected_zone)
         with self.subTest("Test sample zone #2"):
-            zone_key = "#zone-0000001876581719"
+            zone_key = "#zone-0000001924311785"
             expected_zone = {
-                "coordinates": (4933, 7834, 5265, 8034),
+                "coordinates": (1913, 7127, 1983, 7176),
                 "rotate": 0.0,
             }
             self.assertIn(zone_key, zones)
@@ -90,7 +90,7 @@ class MEIParserTestCase(TestCase):
             ## </syllable>
             # Relevant zones (for first syllable and the single neume component in that syllable):
             ## <zone xml:id="zone-0000001663913937" ulx="2426" uly="2451" lrx="2639" lry="2651"/>
-            ## <zone xml:id="zone-0000001993884372" ulx="2608" uly="2399" lrx="2678" lry="2448"/>
+            ## <zone xml:id="zone-0000001993884372" ulx="2608" uly="2391" lrx="2678" lry="2440"/>
             expected_first_syllable: Syllable = {
                 "text": {
                     "text": "Ec",
@@ -107,7 +107,7 @@ class MEIParserTestCase(TestCase):
                                 "pname": "d",
                                 "octave": 3,
                                 "bounding_box": {
-                                    "coordinates": (2608, 2399, 2678, 2448),
+                                    "coordinates": (2608, 2391, 2678, 2440),
                                     "rotate": 0.0,
                                 },
                                 "semitone_interval": 0,
@@ -116,7 +116,7 @@ class MEIParserTestCase(TestCase):
                             }
                         ],
                         "bounding_box": {
-                            "coordinates": (2608, 2399, 2678, 2448),
+                            "coordinates": (2608, 2391, 2678, 2440),
                             "rotate": 0.0,
                         },
                         "system": 1,
@@ -126,58 +126,70 @@ class MEIParserTestCase(TestCase):
             self.assertEqual(syllables[0], expected_first_syllable)
         with self.subTest("Test last syllable"):
             # Last syllable:
-            ## <syllable xml:id="syllable-0000001099935725">
-            ##     <syl xml:id="syl-0000001384779917" facs="#zone-0000001876581719">gil</syl>
-            ##     <neume xml:id="neume-0000001160139058">
-            ##         <nc xml:id="nc-0000000858715089" facs="#zone-0000001183492561" oct="2" pname="e"/>
-            ##         <nc xml:id="nc-0000001382334633" facs="#zone-0000002089367816" oct="2" pname="d" tilt="n"/>
+            ## <syllable xml:id="syllable-0000000764470667">
+            ##     <syl xml:id="syl-0000001280622314" facs="#zone-0000001691872419">gil</syl>
+            ##     <neume xml:id="neume-0000000529809002">
+            ##         <nc xml:id="nc-0000002078669346" facs="#zone-0000001705972533" oct="2" pname="e"/>
+            ##     </neume>
+            ##     <neume xml:id="neume-0000000342143339">
+            ##         <nc xml:id="nc-0000001398460892" facs="#zone-0000000187867615" oct="2" pname="d"/>
             ##     </neume>
             ## </syllable>
             # Relevant zones (for last syllable and the two neume components in that syllable):
-            ## <zone xml:id="zone-0000001876581719" ulx="4933" uly="7834" lrx="5265" lry="8034"/>
-            ## <zone xml:id="zone-0000001183492561" ulx="5037" uly="7724" lrx="5108" lry="7774"/>
-            ## <zone xml:id="zone-0000002089367816" ulx="5104" uly="7774" lrx="5175" lry="7824"/>
+            ## <zone xml:id="zone-0000001691872419" ulx="4948" uly="7825" lrx="5272" lry="8082"/>
+            ## <zone xml:id="zone-0000001705972533" ulx="5033" uly="7731" lrx="5105" lry="7782"/>
+            ## <zone xml:id="zone-0000000187867615" ulx="5097" uly="7782" lrx="5169" lry="7833"/>
             expected_last_syllable: Syllable = {
                 "text": {
                     "text": "gil",
                     "bounding_box": {
-                        "coordinates": (4933, 7834, 5265, 8034),
+                        "coordinates": (4948, 7825, 5272, 8082),
                         "rotate": 0.0,
                     },
                 },
                 "neumes": [
                     {
-                        "neume_name": "clivis",
+                        "neume_name": "punctum",
                         "neume_components": [
                             {
                                 "pname": "e",
                                 "octave": 2,
                                 "bounding_box": {
-                                    "coordinates": (5037, 7724, 5108, 7774),
+                                    "coordinates": (5033, 7731, 5105, 7782),
                                     "rotate": 0.0,
                                 },
                                 "semitone_interval": -2,
                                 "contour": "d",
-                                "system": 10,
-                            },
+                                "system": 13,
+                            }
+                        ],
+                        "bounding_box": {
+                            "coordinates": (5033, 7731, 5105, 7782),
+                            "rotate": 0.0,
+                        },
+                        "system": 13,
+                    },
+                    {
+                        "neume_name": "punctum",
+                        "neume_components": [
                             {
                                 "pname": "d",
                                 "octave": 2,
                                 "bounding_box": {
-                                    "coordinates": (5104, 7774, 5175, 7824),
+                                    "coordinates": (5097, 7782, 5169, 7833),
                                     "rotate": 0.0,
                                 },
                                 "semitone_interval": None,
                                 "contour": None,
-                                "system": 10,
+                                "system": 13,
                             },
                         ],
                         "bounding_box": {
-                            "coordinates": (5037, 7724, 5175, 7824),
+                            "coordinates": (5097, 7782, 5169, 7833),
                             "rotate": 0.0,
                         },
-                        "system": 10,
-                    }
+                        "system": 13,
+                    },
                 ],
             }
             self.assertEqual(syllables[-1], expected_last_syllable)
