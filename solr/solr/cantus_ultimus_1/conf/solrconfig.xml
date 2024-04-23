@@ -73,6 +73,12 @@
             <int name="rows">10</int>
             <str name="df">text</str>
         </lst>
+        <lst name="appends">
+            <arr name="fl">
+            <!-- Pass json fields through json transformer -->
+            <str>location_json:[json]</str>
+            </arr>
+        </lst>
     </requestHandler>
 
     <!-- A request handler that returns indented JSON by default -->
