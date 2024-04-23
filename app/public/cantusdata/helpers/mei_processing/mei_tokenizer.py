@@ -38,7 +38,7 @@ class NgramDocument(TypedDict):
         type: The type of the document (corresponds to solr schema's type field)
     """
 
-    location: str
+    location_json: str
     pitch_names: str
     contour: str
     semitone_intervals: str
@@ -118,7 +118,7 @@ class MEITokenizer(MEIParser):
         zones_with_sys = [(nc["bounding_box"], nc["system"]) for nc in neume_components]
         location = stringify_bounding_boxes(combine_bounding_boxes(zones_with_sys))
         return {
-            "location": location,
+            "location_json": location,
             "pitch_names": pitch_names,
             "contour": contour,
             "semitone_intervals": intervals,
